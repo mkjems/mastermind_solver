@@ -1,0 +1,25 @@
+{
+  "name": "mastermind_solver",
+  "version": "1.0.0",
+  "description": "Algotithm that solves codes in the game Mastermind ",
+  "main": "mastermindSolver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mkjems/mastermind_solver.git"
+  },
+  "keywords": [
+    "mastermind"
+  ],
+  "author": "M. Kjems",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mkjems/mastermind_solver/issues"
+  },
+  "homepage": "https://github.com/mkjems/mastermind_solver#readme",
+  "dependencies": {
+    "shallow-equal": "^1.0.0"
+  }
+}
