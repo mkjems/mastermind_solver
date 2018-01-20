@@ -1,65 +1,39 @@
-var compare = require('shallow-equal/arrays');
-
+const  shallowEqual = require('shallow-equal/arrays');
 const { log } = require('./log');
-const { colors } = require('./constants');
+const { colors, correct_feedback } = require('./constants');
 const { generate } = require('./generateAllMasterMindCombinations');
-
 const { calculateFeedback } = require('./calculateFeedback');
+const { getUserFeedback } = require('./getUserFeedback');
+const { printInstructions } = require('./printInstructions');
 
-const first_all = generate(colors, 4);
-
-const usersHiddenCode = [2, 4, 1, 3];
-log('usersHiddenCode', usersHiddenCode);
-
-// ----------------------
-log('first', first_all);
-log(first_all.length);
-
-const firstGuess = [1, 1, 2, 2];
-log('first guess:', firstGuess);
-
-calculateFeedback(usersHiddenCode, firstGuess)
-    .then((feedback_01) => {
-        log('1st. feedback', feedback_01);
-        
-        const second_all = first_all.filter(ca => {
-            return compare(calculateFeedback(ca, firstGuess), feedback_01);
-        });
-        log('*****************************************************');
+const elimination = (possibi, guess, feedback) => {
+    return possibi.filter(code => {
+        return shallowEqual(calculateFeedback(code, guess), feedback);
     });
+};
 
-// ----------------------
+// Simple algorithm for finding next guess from remaining possibilities!
+const newGuess = (possibilities) => {
+    return possibilities[0];
+}
 
-// log('second_all', second_all);
+const go = async (guess, possibilities, done) => {
+    console.log('possibilities', possibilities.length);
+    const feedback = await getUserFeedback(guess);
+    const new_possibilities = elimination(possibilities, guess, feedback);
+    const new_guess = newGuess(new_possibilities);
+    shallowEqual(correct_feedback, feedback) ? done() : go(new_guess, new_possibilities, done);
+};
 
-// const secondGuess = second_all[0];
-// log('second guess:', secondGuess);
+const done = () => {
+    console.log('-- DONE! -- ');
+}
 
-// const fb_02 = calculateFeedback(usersHiddenCode, secondGuess);
-// log('2nd. feedback', fb_02);
+const startGame = async () => {
+    const a = await printInstructions();
+    const possibilities = generate(colors, 4);
+    const guess = [1, 1, 2, 2];
+    go(guess, possibilities, done);
+}
 
-// const third_all = second_all.filter(ca => {
-//     return compare(calculateFeedback(ca, secondGuess), fb_02);
-// });
-
-// log('*****************************************************');
-
-// // ----------------------
-
-// log('third_all', third_all);
-
-// const thirdGuess = third_all[0];
-// log('third guess:', firstGuess);
-
-// const fb_03 = calculateFeedback(usersHiddenCode, thirdGuess);
-// log('3. feedback', fb_03);
-
-// const fourth_all = third_all.filter(ca => {
-//     return compare(calculateFeedback(ca, thirdGuess), fb_03);
-// });
-
-// log('*****************************************************');
-
-// // ----------------------
-
-// log('fourth_all', fourth_all);
+startGame();

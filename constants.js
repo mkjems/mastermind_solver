@@ -1,18 +1,21 @@
 
-const colors = {
-    1: 'yellow',
-    2: 'pink',
-    3: 'white',
-    4: 'grey'
-    // 5: 'red',
-    // 6: 'green',
-    // 7: 'blue',
-    // 8: 'silver'
-};
+const colors = [
+    'yellow',
+    'magenta',
+    'white',
+    'orange',
+    'red',
+    'green',
+    'blue',
+    'silver'
+];
 
-const colorKeys = Object.keys(colors).map(k=>Number(k));
+const colorKeys = Object.keys(colors).map(k => Number(k));
+
+const correct_feedback = ['red', 'red', 'red', 'red'];
 
 module.exports = {
     colors,
-    colorKeys
+    colorKeys,
+    correct_feedback
 };

@@ -4,7 +4,7 @@
   "description": "Algotithm that solves codes in the game Mastermind ",
   "main": "mastermindSolver.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ./mastermindSolver.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,8 @@
   },
   "homepage": "https://github.com/mkjems/mastermind_solver#readme",
   "dependencies": {
+    "chalk": "^2.3.0",
+    "lodash": "^4.17.4",
     "shallow-equal": "^1.0.0"
   }
 }
