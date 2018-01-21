@@ -7,7 +7,8 @@ const user_input = {
     r: 'red',
     n: 'none'
 }
-exports.getUserFeedback = (guess) => {
+
+exports.getUserFeedback = (guess, guessNumber, possibilitiesNumber ) => {
     return new Promise((resolve, reject) => {
 
         const rl = readline.createInterface({
@@ -20,7 +21,8 @@ exports.getUserFeedback = (guess) => {
             return ' ' + chalk.keyword(color)(color);
         });
         const prompt = `
-        My guess is: ${color_guess}. 
+        There are ${possibilitiesNumber} possibilities left
+        My guess #${guessNumber} is: ${color_guess}. 
 
         Use: 
         'r' (red) - correct position and color.  
