@@ -6,6 +6,7 @@ const { calculateFeedback } = require('./calculateFeedback');
 const { getUserFeedback } = require('./getUserFeedback');
 const { printInstructions } = require('./printInstructions');
 
+// remove combinations that do not produce the feedback we recieved.
 const elimination = (possibi, guess, feedback) => {
     return possibi.filter(code => {
         return shallowEqual(calculateFeedback(code, guess), feedback);
